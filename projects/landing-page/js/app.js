@@ -20,13 +20,16 @@
 const fragment = document.createDocumentFragment();
 const sections = document.querySelectorAll("section");
 const list = document.getElementById("navbar__list");
+let goto;
 
 /**
  * End Global Variables
  * Start Helper Functions
  * 
  */
-
+function gotoelement(toelement) {
+    toelement.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+}
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -71,8 +74,7 @@ document.addEventListener("scroll", function() {
 });
 // Scroll to anchor ID using scrollTO event
 
-
-/**
+/**0
  * End Main Functions
  * Begin Events
  * 
@@ -81,5 +83,12 @@ document.addEventListener("scroll", function() {
 // Build menu 
 
 // Scroll to section on link click
+list.addEventListener("click", function(evt) {
+    evt.preventDefault();
+    if (evt.target.nodeName === 'A') {
+        goto = document.getElementById(evt.target.classList[0]);
+        gotoelement(goto);
+    }
 
+});
 // Set sections as active
