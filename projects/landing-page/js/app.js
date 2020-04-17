@@ -11,47 +11,77 @@
  * 
  * JS Standard: ESlint
  * 
-*/
+ */
 
 /**
  * Define Global Variables
  * 
-*/
-
+ */
+const fragment = document.createDocumentFragment();
+const sections = document.querySelectorAll("section");
+const list = document.getElementById("navbar__list");
 
 /**
  * End Global Variables
  * Start Helper Functions
  * 
-*/
-
-
+ */
 
 /**
  * End Helper Functions
  * Begin Main Functions
  * 
-*/
+ */
 
 // build the nav
+function buildnav() {
+    for (section of sections) {
+        const menuitem = document.createElement("li");
+        const linkitem = document.createElement("a");
 
+        linkitem.setAttribute("href", "#" + section.id);
+        menuitem.setAttribute("class", section.id);
+        linkitem.setAttribute("class", "menu__link");
+        linkitem.textContent = section.id;
+        menuitem.appendChild(linkitem);
+        fragment.appendChild(menuitem);
+    }
+    list.appendChild(fragment);
+};
+buildnav();
 
 // Add class 'active' to section when near top of viewport
+function makeactive() {
+    for (section of sections) {
+        let current_li = document.querySelector(section.id);
+        const box = section.getBoundingClientRect();
+        if (box.top <= 200 && box.bottom >= 200) {
+            section.classList.add("your-active-class");
+            current_li.classList.add("active_menu");
+        } else {
+            section.classList.remove("your-active-class");
+            current_li.classList.remove("active_menu");
 
+        }
+    }
+}
 
+document.addEventListener("scroll", function() {
+    makeactive()
+});
 // Scroll to anchor ID using scrollTO event
+function scrollto(params) {
 
+}
 
 /**
  * End Main Functions
  * Begin Events
  * 
-*/
+ */
 
 // Build menu 
 
 // Scroll to section on link click
 
 // Set sections as active
-
-
