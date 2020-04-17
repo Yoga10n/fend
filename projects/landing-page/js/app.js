@@ -40,8 +40,7 @@ function buildnav() {
         const linkitem = document.createElement("a");
 
         linkitem.setAttribute("href", "#" + section.id);
-        menuitem.setAttribute("class", section.id);
-        linkitem.setAttribute("class", "menu__link");
+        linkitem.classList.add(section.id, "menu__link");
         linkitem.textContent = section.id;
         menuitem.appendChild(linkitem);
         fragment.appendChild(menuitem);
@@ -53,26 +52,25 @@ buildnav();
 // Add class 'active' to section when near top of viewport
 function makeactive() {
     for (section of sections) {
-        let current_li = document.querySelector(section.id);
+        let current_a = list.getElementsByClassName(section.id).item("0");
         const box = section.getBoundingClientRect();
         if (box.top <= 200 && box.bottom >= 200) {
             section.classList.add("your-active-class");
-            current_li.classList.add("active_menu");
+            current_a.classList.add("active_menu");
         } else {
             section.classList.remove("your-active-class");
-            current_li.classList.remove("active_menu");
+            current_a.classList.remove("active_menu");
 
         }
     }
+
 }
 
 document.addEventListener("scroll", function() {
     makeactive()
 });
 // Scroll to anchor ID using scrollTO event
-function scrollto(params) {
 
-}
 
 /**
  * End Main Functions
